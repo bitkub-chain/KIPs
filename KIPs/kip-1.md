@@ -227,7 +227,7 @@ KIPs are encouraged to follow [RFC 2119](https://www.ietf.org/rfc/rfc2119.html) 
 
 ## History
 
-This document was heavility derived from the [Ethereum EIP-1](https://github.com/ethereum/EIPs/) written by Hudson Jameson and Martin Becze which in turn was derived from [Bitcoin's BIP-0001](https://github.com/bitcoin/bips) written by Amir Taaki which in turn was derived from [Python's PEP-0001](https://peps.python.org/). In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the KUB Improvement Proposal, and should not be bothered with technical questions specific to Bitkub Chain or the KIP. Please direct all comments to the KIP editors.
+This document was heavily derived from the [Ethereum EIP-1](https://github.com/ethereum/EIPs/) written by Hudson Jameson and Martin Becze which in turn was derived from [Bitcoin's BIP-0001](https://github.com/bitcoin/bips) written by Amir Taaki which in turn was derived from [Python's PEP-0001](https://peps.python.org/). In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the KUB Improvement Proposal, and should not be bothered with technical questions specific to Bitkub Chain or the KIP. Please direct all comments to the KIP editors.
 
 ## Copyright
 
