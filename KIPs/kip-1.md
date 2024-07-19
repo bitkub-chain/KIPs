@@ -87,7 +87,7 @@ Each KIP should have the following parts:
 
 ## KIP Formats and Templates
 
-KIPs should be written in [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) format. There is a [template](kip-template.md) to follow.
+KIPs should be written in [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) format. There is a [template](/kip-template.md) to follow.
 
 ## KIP Header Preamble
 
@@ -231,4 +231,4 @@ This document was heavily derived from the [Ethereum EIP-1](https://github.com/e
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](LICENSE).
+Copyright and related rights waived via [CC0](/LICENSE).
