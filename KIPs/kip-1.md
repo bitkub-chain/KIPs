@@ -48,7 +48,7 @@ Once the idea has been vetted, your next responsibility will be to present (thro
 
 The following is the standardization process for all KIPs in all tracks:
 
-![KIP Status Diagram](KIPs/assets/kip-1/KIP_Process.png)
+![KIP Status Diagram](/KIPs/assets/kip-1/KIP_Process.png)
 
 **Idea** - An idea that is pre-draft. This is not tracked within the KIP Repository.
 
