@@ -2,7 +2,7 @@
 kip: 1
 title: KIP Purpose and Guidelines
 author: Bitkub Chain (@bitkubchain), et al.
-status: Draft
+status: Living
 type: Meta
 created: 2024-07-19
 ---
