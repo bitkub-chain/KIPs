@@ -3,7 +3,7 @@ kip: 22
 title: Loyalty Points Token Standard on Bitkub Chain
 description: A standard interface for loyalty points tokens on Bitkub Chain
 author: Bitkub Chain (@bitkubchain), et al.
-status: Draft
+status: Final
 type: Standards Track
 category: KAP
 ---
@@ -28,7 +28,7 @@ NOTE: The following specifications use syntax from Solidity `0.8.0` (or above)
 
 Check whether `_addr` is the Super Admin role in `_project`.
 
-``` js
+```js
 function isSuperAdmin(address _addr, string calldata _project) external view returns (bool)
 ```
 
@@ -36,7 +36,7 @@ function isSuperAdmin(address _addr, string calldata _project) external view ret
 
 Check whether `_addr` is the Admin role in `_project`.
 
-``` js
+```js
 function isAdmin(address _addr, string calldata _project) external view returns (bool)
 ```
 
@@ -46,7 +46,7 @@ function isAdmin(address _addr, string calldata _project) external view returns 
 
 Returns the KYC Level of `_addr`
 
-``` js
+```js
 function kycsLevel(address _addr) external view returns (uint256)
 ```
 
@@ -58,7 +58,7 @@ function kycsLevel(address _addr) external view returns (uint256)
 
 Returns the total token supply.
 
-``` js
+```js
 function totalSupply() external view returns (uint256)
 ```
 
@@ -68,7 +68,7 @@ Returns the number of decimals the token uses - e.g. `8`, means to divide the to
 
 NOTE: This method is optional in ERC-20. In KAP-20, this is a required method.
 
-``` js
+```js
 function decimals() external view returns (uint8)
 ```
 
@@ -78,7 +78,7 @@ Returns the symbol of the token. E.g. "HIX".
 
 NOTE: This method is optional in ERC-20. In KAP-20, this is a required method.
 
-``` js
+```js
 function symbol() external view returns (string memory)
 ```
 
@@ -88,7 +88,7 @@ Returns the name of the token - e.g.`"MyToken"`.
 
 NOTE: This method is optional in ERC-20. In KAP-20, this is a required method.
 
-``` js
+```js
 function name() external view returns (string memory)
 ```
 
@@ -96,7 +96,7 @@ function name() external view returns (string memory)
 
 Returns the amount which `spender` is still allowed to withdraw from `owner`.
 
-``` js
+```js
 function allowance(address owner, address spender) external view returns (uint256)
 ```
 
@@ -106,7 +106,7 @@ Allows `spender` to withdraw from your account multiple times, up to the `amount
 
 NOTE: To prevent attack vectors, clients SHOULD make sure to create user interfaces in such a way that they set the allowance first to 0 before setting it to another value for the same spender. THOUGH The contract itself shouldn't enforce it, to allow backwards compatibility with contracts deployed before
 
-``` js
+```js
 function approve(address spender, uint256 amount) external returns (bool)
 ```
 
@@ -116,7 +116,7 @@ Allows `spender` to withdraw from `owner` account multiple times, up to the `amo
 
 NOTE: This function can only be called by the Admin and Super Admin. This function is designed to create transactions automatically on behalf of token holders if they have been a victim of a fraudulent transaction.
 
-``` js
+```js
 function adminApprove(address owner, address spender, uint256 amount) external returns (bool)
 ```
 
@@ -128,7 +128,7 @@ The `transferFrom` method is used for a withdraw workflow, allowing contracts to
 
 NOTE: Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
 
-``` js
+```js
 function transferFrom(address sender, address recipient, uint256 amount) external returns (bool)
 ```
 
@@ -138,9 +138,10 @@ Transfers `amount` amount of tokens from address `sender` to address `recipient`
 
 NOTE: This function can only be called by the Committee address required in the constructor. This function is designed to create transactions automatically on behalf of token holders if they have been a victim of a fraudulent transaction. This method works similar to the `transferFrom` method.
 
-``` js
+```js
 function adminTransfer(address sender, address recipient, uint256 amount) external returns (bool)
 ```
+
 #### Event
 
 ##### Transfer
@@ -149,7 +150,7 @@ MUST trigger when tokens are transferred, including zero value transfers.
 
 A token contract which creates new tokens SHOULD trigger a Transfer event with the `from` address set to `0x0` when tokens are created.
 
-``` js
+```js
 event Transfer(address indexed from, address indexed to, uint256 value)
 ```
 
@@ -157,7 +158,7 @@ event Transfer(address indexed from, address indexed to, uint256 value)
 
 MUST trigger on any successful call to `approve(address spender, uint256 value)`.
 
-``` js
+```js
 event Approval(address indexed owner, address indexed spender, uint256 value)
 ```
 
@@ -169,7 +170,7 @@ event Approval(address indexed owner, address indexed spender, uint256 value)
 
 Mint `amount` amount of token to `receiver` address without period, and MUST fire the `Mint` event.
 
-``` js
+```js
 function mint(address receiver, uint256 amount) external returns (bool);
 ```
 
@@ -177,7 +178,7 @@ function mint(address receiver, uint256 amount) external returns (bool);
 
 Mint `amount` amount of token to `receiver` address with the current period.
 
-``` js
+```js
 function mintCurrentPeriod(address receiver, uint256 amount) external returns (bool);
 ```
 
@@ -185,7 +186,7 @@ function mintCurrentPeriod(address receiver, uint256 amount) external returns (b
 
 Mint `amount` amount of token to `receiver` address with the customizable `period` period.
 
-``` js
+```js
 function mintCustomPeriod(address receiver, uint256 amount, uint256 period) external returns (bool);
 ```
 
@@ -195,7 +196,7 @@ Transfers `amount` amount of tokens to address `recipient`, and MUST fire the `T
 
 NOTE: Tokens that are about to expired will be transferred first
 
-``` js
+```js
 function transfer(address recipient, uint256 amount) external returns (bool)
 ```
 
@@ -203,7 +204,7 @@ function transfer(address recipient, uint256 amount) external returns (bool)
 
 Transfer `amount` amount of token without period to `recipient` address.
 
-``` js
+```js
 function transferNoPeriod(address recipient, uint256 amount) external returns (bool);
 ```
 
@@ -211,7 +212,7 @@ function transferNoPeriod(address recipient, uint256 amount) external returns (b
 
 Transfer `amount` amount of token without period to `recipient` address and stamp the `period` period to the token, and MUST fire the `TransferPeriod` event. The function SHOULD `throw` if the message caller's account balance does not have enough tokens to spend.
 
-``` js
+```js
 function transferStampPeriod(address recipient, uint256 amount, uint256 period) external returns (bool);
 ```
 
@@ -219,7 +220,7 @@ function transferStampPeriod(address recipient, uint256 amount, uint256 period) 
 
 Transfer `amount` amount of token within the desired `period` period to `recipient` address, and MUST fire the `TransferPeriod` event. The function SHOULD `throw` if the message caller's account balance does not have enough tokens to spend.
 
-``` js
+```js
 function transferCustomPeriod(address recipient, uint256 amount, uint256 period) external returns (bool);
 ```
 
@@ -227,7 +228,7 @@ function transferCustomPeriod(address recipient, uint256 amount, uint256 period)
 
 Returns the balance of active tokens in every period of `account` address.
 
-``` js
+```js
 function balanceOf(address account) external view returns (uint256)
 ```
 
@@ -235,7 +236,7 @@ function balanceOf(address account) external view returns (uint256)
 
 Returns the balance of tokens in every period of `account` address.
 
-``` js
+```js
 function balanceOfAll(address account) external view returns (uint256);
 ```
 
@@ -243,7 +244,7 @@ function balanceOfAll(address account) external view returns (uint256);
 
 Returns the balance of tokens in the selected `period` period of `account` address.
 
-``` js
+```js
 function balanceOfPeriod(address account, uint256 period) external view returns (uint256);
 ```
 
@@ -251,7 +252,7 @@ function balanceOfPeriod(address account, uint256 period) external view returns 
 
 Returns the balance of expired tokens of `account` address.
 
-``` js
+```js
 function balanceOfExpired(address account) external view returns (uint256);
 ```
 
@@ -261,7 +262,7 @@ Burns the `amount` amount of tokens, and MUST fire the `Burn` event.
 
 NOTE: Tokens that are about to expired will be burned first
 
-``` js
+```js
 function burn(uint256 amount) external returns (bool);
 ```
 
@@ -269,7 +270,7 @@ function burn(uint256 amount) external returns (bool);
 
 Burns the `amount` amount of tokens in the selected `period` period.
 
-``` js
+```js
 function burnCustomPeriod(uint256 amount, uint256 period) external returns (bool);
 ```
 
@@ -277,7 +278,7 @@ function burnCustomPeriod(uint256 amount, uint256 period) external returns (bool
 
 Returns the address of the token that is pegged with the loyalty token.
 
-``` js
+```js
 function pegToken() external view returns (address);
 ```
 
@@ -285,7 +286,7 @@ function pegToken() external view returns (address);
 
 Returns the ratio of the loyalty token and the pegged token.
 
-``` js
+```js
 function ratio() external view returns (uint256);
 ```
 
@@ -293,7 +294,7 @@ function ratio() external view returns (uint256);
 
 Returns the index of the current period.
 
-``` js
+```js
 function currentIndex() external view returns (uint256);
 ```
 
@@ -301,7 +302,7 @@ function currentIndex() external view returns (uint256);
 
 Returns the current period.
 
-``` js
+```js
 function currentPeriod() external view returns (uint256);
 ```
 
@@ -309,7 +310,7 @@ function currentPeriod() external view returns (uint256);
 
 Returns the total amount of tokens without period.
 
-``` js
+```js
 function totalUnStampSupply() external view returns (uint256);
 ```
 
@@ -317,7 +318,7 @@ function totalUnStampSupply() external view returns (uint256);
 
 Returns the total amount of expired tokens.
 
-``` js
+```js
 function totalExpiredUserSupply() external view returns (uint256);
 ```
 
@@ -325,7 +326,7 @@ function totalExpiredUserSupply() external view returns (uint256);
 
 Returns the total amount of expired tokens of both `Owner` and `Receiver`.
 
-``` js
+```js
 function totalExpiredOwnerReceiverSupply() external view returns (uint256);
 ```
 
@@ -333,7 +334,7 @@ function totalExpiredOwnerReceiverSupply() external view returns (uint256);
 
 Returns the number of seconds in the selected period.
 
-``` js
+```js
 function readPeriodTimestamp(uint256 page, uint256 limit) external view returns (uint256[] memory);
 ```
 
@@ -341,7 +342,7 @@ function readPeriodTimestamp(uint256 page, uint256 limit) external view returns 
 
 Sets the amount of seconds in the selected period.
 
-``` js
+```js
 function setPeriodTimeStamp(uint256[] calldata index, uint256[] calldata timestamp) external returns (bool);
 ```
 
@@ -351,7 +352,7 @@ function setPeriodTimeStamp(uint256[] calldata index, uint256[] calldata timesta
 
 MUST trigger on any successful call to `mint(address receiver, uint256 amount)`.
 
-``` js
+```js
 event Mint(uint256 indexed period, address indexed receiver, uint256 amount);
 ```
 
@@ -359,7 +360,7 @@ event Mint(uint256 indexed period, address indexed receiver, uint256 amount);
 
 MUST trigger on any successful call to `burn(uint256 amount)`.
 
-``` js
+```js
 event Burn(address indexed owner, uint256 amount);
 ```
 
@@ -367,7 +368,7 @@ event Burn(address indexed owner, uint256 amount);
 
 MUST trigger on any successful call to `transfer(address recipient, uint256 amount)`, `transferStampPeriod(address recipient, uint256 amount, uint256 period)`, and `transferCustomPeriod(address recipient, uint256 amount, uint256 period)`.
 
-``` js
+```js
 event TransferPeriod(address indexed sender, address indexed recipient, uint256 value, uint256 period);
 ```
 
@@ -379,17 +380,17 @@ Transfers `amount` amount of tokens to address `recipient` internally from `send
 
 NOTE: This function can only be called by the Super Admin and the Transfer Router.
 
-``` js
+```js
 function internalTransfer(address sender, address recipient, uint256 amount) external returns (bool)
 ```
 
 ##### externalTransfer
 
-Transfers `amount` amount of tokens to address `recipient` externally from `sender`, and MUST fire the `Transfer` event. The function SHOULD `throw` if the message caller's account balance does not have enough tokens to spend. The function externalTransfer allows tokens to be transferred between addresses that have only passed the sender's KYC verification process. 
+Transfers `amount` amount of tokens to address `recipient` externally from `sender`, and MUST fire the `Transfer` event. The function SHOULD `throw` if the message caller's account balance does not have enough tokens to spend. The function externalTransfer allows tokens to be transferred between addresses that have only passed the sender's KYC verification process.
 
 NOTE: This function can only be called by the Super Admin and the Transfer Router.
 
-``` js
+```js
 function externalTransfer(address sender, address recipient, uint256 amount) external returns (bool)
 ```
 
